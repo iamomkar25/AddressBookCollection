@@ -19,21 +19,21 @@ namespace AddressBook_UsingCollection
             switch (Console.ReadLine())
             {
                 case "1":
-                 AddrBook.GetCustomer();
-                 AddrBook.ListingPeople();
+                    AddressBook_UsingCollection.AddrBook.GetCustomer();
+                    AddressBook_UsingCollection.AddrBook.ListingPeople();
                     break;
                 case "2":
-                  AddrBook.GetCustomer();
-                   AddrBook.Modify();
-                   AddrBook.ListingPeople();
+                    AddressBook_UsingCollection.AddrBook.GetCustomer();
+                    AddressBook_UsingCollection.AddrBook.Modify();
+                    AddressBook_UsingCollection.AddrBook.ListingPeople();
                     break;
                 case "3":
-                 AddrBook.GetCustomer();
-                 AddrBook.ListingPeople();
+                   AddressBook_UsingCollection.AddrBook.GetCustomer();
+                    AddressBook_UsingCollection.AddrBook.ListingPeople();
                     break;
                 case "4":
-                AddrBook.GetCustomer();
-                    AddrBook.RemovePeople();
+                    AddressBook_UsingCollection.AddrBook.GetCustomer();
+                    AddressBook_UsingCollection.AddrBook.RemovePeople();
 
                     break;
                 default:
@@ -41,6 +41,7 @@ namespace AddressBook_UsingCollection
                     break;
 
             }
+
 
         }
     }

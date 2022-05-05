@@ -8,7 +8,6 @@ namespace AddressBook_UsingCollection
 {
     internal class AddrBook
     {
-
         public static List<Person> People = new List<Person>();
         public class Person
         {
