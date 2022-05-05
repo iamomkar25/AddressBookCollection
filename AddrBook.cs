@@ -6,9 +6,22 @@ using System.Threading.Tasks;
 
 namespace AddressBook_UsingCollection
 {
-    internal class AddrBook
+    public interface IAddressBookSystem
     {
-        public static List<Person> People = new List<Person>();
+        void GetCustomer();
+
+        void ListingPeople();
+        void RemovePeople();
+    }
+    public class AddrBook : IAddressBookSystem
+    {
+        public LinkedList<Person> people;
+        public AddrBook()
+        {
+            people = new LinkedList<Person>();
+        }
+
+
         public class Person
         {
             public string FirstName { get; set; }
@@ -22,13 +35,10 @@ namespace AddressBook_UsingCollection
             public string EmailId { get; set; }
         }
 
-        internal static void PrintCustomer(object person)
+        //Getting the user details
+        public void GetCustomer()
         {
-            throw new NotImplementedException();
-        }
 
-        public static void GetCustomer()
-        {
             Person person = new Person();
 
             Console.Write("Enter First Name: ");
@@ -55,9 +65,12 @@ namespace AddressBook_UsingCollection
             Console.Write("Enter EmailId: ");
             person.EmailId = Console.ReadLine();
 
-            People.Add(person);
+            people.AddLast(person);
         }
-        public static void PrintCustomer(Person person)
+
+
+        //Print the details
+        public void PrintCustomer(Person person)
         {
             Console.WriteLine("First Name: " + person.FirstName);
             Console.WriteLine("Last Name: " + person.LastName);
@@ -70,13 +83,14 @@ namespace AddressBook_UsingCollection
             Console.WriteLine("Email Id: " + person.EmailId);
             Console.WriteLine("-------------------------------------------");
         }
-        public static void Modify()
+        //Modify the details
+        public void Modify()
         {
-            if (People.Count != 0)
+            if (people.Count != 0)
             {
                 Console.WriteLine("Enter the contact to modify:");
                 string Modified = Console.ReadLine();
-                foreach (var person in People)
+                foreach (var person in people)
                 {
                     if (person.FirstName.ToUpper() == Modified.ToUpper())
                     {
@@ -140,40 +154,47 @@ namespace AddressBook_UsingCollection
 
             }
         }
-        //Removing the detail
-        public static void RemovePeople()
+        //Listing the user entered details or modified details
+        public void ListingPeople()
         {
-            Console.WriteLine("Enter the first name of the person you would like to remove.");
-            string Remove = Console.ReadLine();
-            foreach (var person in People.ToList())
+            if (people.Count == 0)
             {
-                if (person.FirstName.ToUpper() == Remove.ToUpper())
-                {
-                    People.Remove(person);
-                    Console.WriteLine("Contact is deleted");
-                }
-                else
-                {
-                    Console.WriteLine("Contact is not present");
-                }
-            }
-        }
-        public static void ListingPeople()
-        {
-            if (People.Count == 0)
-            {
-                Console.WriteLine("Your address book is empty. Press any key to continue.");
+                Console.WriteLine("Your address book is empty.");
                 Console.ReadKey();
                 return;
             }
             Console.WriteLine("Here are the current people in your address book:\n");
-            foreach (var person in People)
+            foreach (var person in people)
             {
                 PrintCustomer(person);
             }
+            return;
             Console.WriteLine("\nPress any key to continue.");
-            Console.ReadKey();
-        }
 
+            Console.ReadKey();
+
+        }
+        //Removing the field using Lambda Function
+        public void RemovePeople()
+        {
+            Console.WriteLine("Enter the first name of the person you would like to remove.");
+            string firstName = Console.ReadLine();
+            Person person = people.FirstOrDefault(x => x.FirstName.ToUpper() == firstName.ToUpper());
+            if (person == null)
+            {
+                Console.WriteLine("That person could not be found..");
+
+                return;
+            }
+            Console.WriteLine("Are you sure you want to remove this person from your address book? (Y/N)");
+            //  PrintCustomer(person);
+
+            if (Console.ReadKey().Key == ConsoleKey.Y)
+            {
+                people.Remove(person);
+                Console.WriteLine("\nPerson removed ");
+
+            }
+        }
     }
 }
