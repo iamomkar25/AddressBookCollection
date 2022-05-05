@@ -8,13 +8,15 @@ namespace AddressBook_UsingCollection
 {
     public interface IAddressBookSystem
     {
-        //void GetCustomer();
-
         void ListingPeople();
         void RemovePeople();
     }
     public class AddrBook : IAddressBookSystem
     {
+        public static Dictionary<string, List<AddrBook>> City = new Dictionary<string, List<AddrBook>>();
+        public static Dictionary<string, List<AddrBook>> State = new Dictionary<string, List<AddrBook>>();
+        public List<AddrBook> stateList;
+        public List<AddrBook> cityList;
         public List<AddrBook> people;
         public AddrBook()
         {
@@ -65,8 +67,6 @@ namespace AddressBook_UsingCollection
                 }
             }
         }
-
-
         //Print the details
         public void PrintCustomer(AddrBook person)
         {
@@ -147,8 +147,6 @@ namespace AddressBook_UsingCollection
                     }
 
                 }
-
-
             }
         }
         //Listing the user entered details or modified details
@@ -166,9 +164,6 @@ namespace AddressBook_UsingCollection
                 PrintCustomer(person);
             }
             return;
-            //Console.WriteLine("\nPress any key to continue.");
-
-            //Console.ReadKey();
 
         }
         //Removing the field using Lambda Function
@@ -184,8 +179,6 @@ namespace AddressBook_UsingCollection
                 return;
             }
             Console.WriteLine("Are you sure you want to remove this person from your address book? (Y/N)");
-            //  PrintCustomer(person);
-
             if (Console.ReadKey().Key == ConsoleKey.Y)
             {
                 people.Remove(person);
@@ -193,7 +186,22 @@ namespace AddressBook_UsingCollection
 
             }
         }
-
-
+        public static void StoreCityList(string key, List<AddrBook> cityList, string city)
+        {
+            List<AddrBook> CityList = cityList.FindAll(a => a.city.ToLower() == city);
+            foreach (var i in CityList)
+            {
+                Console.WriteLine("Found person \"{0}\" in Address Book \"{1}\" , residing in City {2}", i.firstName, key, i.city);
+            }
+        }
+        //Display Person names found in given State
+        public static void StoreStateList(string key, List<AddrBook> stateList, string state)
+        {
+            List<AddrBook> StateList = stateList.FindAll(x => x.state.ToLower() == state);
+            foreach (var i in StateList)
+            {
+                Console.WriteLine("Found person \"{0}\" in Address Book \"{1}\" , residing in State {2}", i.firstName, key, i.state);
+            }
+        }
     }
 }
