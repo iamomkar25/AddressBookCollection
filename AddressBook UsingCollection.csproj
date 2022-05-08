@@ -44,11 +44,18 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddrBook.cs" />
+    <Compile Include="ContactPersonComparer.cs" />
+    <Compile Include="CsvOperation.cs" />
+    <Compile Include="FileOperations.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="CsvData.csv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="AddressText.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
